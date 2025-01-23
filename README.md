@@ -146,3 +146,5 @@ flowchart LR
 - [ ] After processing a video clean the loading bar
 - [ ] Make a more modern and user-friendly interface
 - [ ] Add support for more file formats, including audio-only files
+- [ ] Add screenshots of the application in the README
+- [ ] Add dependencies.txt file to the repository and update the README with installation instructions
