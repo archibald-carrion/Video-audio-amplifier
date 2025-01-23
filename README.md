@@ -138,3 +138,11 @@ flowchart LR
     end
 
 ```
+
+## 🔜 Future Improvements
+
+- [ ] Add batch processing capability
+- [ ] Implement preview functionality of the video before and after processing
+- [ ] After processing a video clean the loading bar
+- [ ] Make a more modern and user-friendly interface
+- [ ] Add support for more file formats, including audio-only files
