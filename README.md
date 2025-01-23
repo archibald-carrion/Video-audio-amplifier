@@ -49,3 +49,92 @@ python main.py
 3. Adjust amplification factor (default: 2.0)
 4. Click "Process Video" to start
 5. Monitor progress through the progress bar
+
+## 🏗️ Architecture
+
+### Overview
+
+The application follows a clean architecture pattern with clear separation between the backend processing logic and frontend UI components.
+
+```mermaid
+graph TB
+    subgraph Frontend
+        UI[GUI Interface]
+        Events[Event Handlers]
+        StateManagement[State Management]
+    end
+    
+    subgraph Backend
+        VideoProcessor[Video Processor]
+        Status[Status Updates]
+        FileOps[File Operations]
+    end
+    
+    UI --> Events
+    Events --> StateManagement
+    StateManagement --> VideoProcessor
+    VideoProcessor --> Status
+    Status --> StateManagement
+    VideoProcessor --> FileOps
+```
+
+
+### Component Breakdown
+
+#### Backend (`VideoProcessor`)
+
+The backend is responsible for all video processing operations and maintains its own state through the `ProcessingStatus` class.
+
+```mermaid
+sequenceDiagram
+    participant UI as Frontend
+    participant VP as VideoProcessor
+    participant FS as FileSystem
+    
+    UI->>VP: Start Processing
+    VP->>FS: Create Temp Directory
+    VP->>FS: Load Video File
+    VP->>VP: Extract Audio
+    VP->>VP: Amplify Audio
+    VP->>VP: Combine Audio
+    VP->>FS: Save Final Video
+    VP->>UI: Update Status
+    VP->>FS: Cleanup Temp Files
+
+```
+
+Key components:
+- `ProcessingStatus`: Data class for tracking processing state
+- Status callback system for progress updates
+- Clean error handling and reporting
+- Temporary file management
+
+#### Frontend (`VideoAmplifierGUI`)
+
+The frontend handles all user interaction and display logic, communicating with the backend through a clean interface.
+
+Components:
+- File selection dialogs
+- Progress tracking display
+- Status updates
+- Input validation
+- Threading for non-blocking operations
+
+## 🔧 Technical Details
+
+### Data Flow
+
+```mermaid
+flowchart LR
+    A[Input Video] --> B[Extract Audio]
+    B --> C[Audio Amplification]
+    C --> D[Combine Audio]
+    D --> E[Output Video]
+    
+    subgraph Process
+        B
+        C
+        D
+    end
+
+```
