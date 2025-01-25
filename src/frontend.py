@@ -92,12 +92,11 @@ class VideoAmplifierGUI:
         )
         if filename:
             self.input_path.set(filename)
-            # Automatically set output path with '_amplified' suffix
-            if not self.output_path.get():
-                directory = os.path.dirname(filename)
-                basename = os.path.basename(filename)
-                name, ext = os.path.splitext(basename)
-                self.output_path.set(os.path.join(directory, f"{name}_amplified{ext}"))
+            # Always generate a new output path
+            directory = os.path.dirname(filename)
+            basename = os.path.basename(filename)
+            name, ext = os.path.splitext(basename)
+            self.output_path.set(os.path.join(directory, f"{name}_amplified{ext}"))
     
     def browse_output(self):
         filename = filedialog.asksaveasfilename(
