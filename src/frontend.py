@@ -37,13 +37,17 @@ class VideoAmplifierGUI:
             self.status_label.config(text=status.status_message)
         else:
             self.process_button.state(['!disabled'])
-            self.progress_bar['value'] = status.progress
-            self.status_label.config(text=status.status_message)
             
             if status.progress == 100:
                 messagebox.showinfo("Success", "Video processing completed successfully!")
+                # Reset progress bar and status label
+                self.progress_bar['value'] = 0
+                self.status_label.config(text="Ready")
             elif status.error_message:
                 messagebox.showerror("Error", f"Error processing video: {status.error_message}")
+                # Reset progress bar and status label on error as well
+                self.progress_bar['value'] = 0
+                self.status_label.config(text="Ready")
         
     def create_widgets(self):
         # Input file section
