@@ -139,6 +139,9 @@ flowchart LR
 
 ```
 
+## Screenshots
+![Screenshot](doc/app.png)
+
 ## 🔜 Future Improvements
 
 - [ ] Add batch processing capability
